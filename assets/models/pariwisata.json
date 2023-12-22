@@ -1,0 +1,16 @@
+{
+    "createdAt": "",
+    "updatedAt": "",
+    "deletedAt": "",
+    "id": "",
+    "idTripUtama": "",
+    "idBus":  "",
+    "idDriver": "",
+    "idCoDriver": "",
+    "tripNomor": "",
+    "tanggalBerangkat": "",
+    "tanggalKembali": "",
+    "tujuanWisata": "Bedugul Bali",
+    "namaBus": "Selamat Pariwisata",
+    "nilaiKontrak": "4400000"
+}

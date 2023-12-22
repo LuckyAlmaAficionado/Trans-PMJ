@@ -1,0 +1,12 @@
+{
+    "status": true,
+    "idTripUtama": "",
+    "idDriver": "",
+    "idCoDriver": "",
+    "gambarOdometerAwal": "",
+    "odometerAwal": "",
+    "gambarOdometerAkhir": "",
+    "odometerAkhir": "",
+    "createdAt": "",
+    "updatedAt": ""
+}

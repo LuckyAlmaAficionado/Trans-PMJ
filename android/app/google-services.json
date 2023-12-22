@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "288939862255",
+    "firebase_url": "https://backend-wisata-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "backend-wisata",
+    "storage_bucket": "backend-wisata.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:288939862255:android:b15aa2eb19c4df193e531a",
+        "android_client_info": {
+          "package_name": "com.pmjtrans.trans"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnupLg8kUo05R-E8xKIklE1RkL9AzqlAs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
