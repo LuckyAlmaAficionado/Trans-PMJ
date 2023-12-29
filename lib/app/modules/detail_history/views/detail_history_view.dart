@@ -193,7 +193,7 @@ class NavBarDetailPerjalanan extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: Get.width,
-      color: primaryContainerColor,
+      color: primaryColor,
       padding: const EdgeInsets.all(15),
       child: SafeArea(
         child: Row(
