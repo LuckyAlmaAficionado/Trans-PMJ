@@ -3,7 +3,8 @@ import 'package:gap/gap.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
+import 'package:trans/app/constant/colors.dart';
+import 'package:trans/app/modules/list_trip/pariwisata_model.dart';
 import 'package:trans/app/routes/app_pages.dart';
 
 import '../controllers/history_trip_controller.dart';
@@ -17,14 +18,20 @@ class HistoryTripView extends GetView<HistoryTripController> {
       children: [
         NavBarHistoryTrip(),
         Expanded(
-          child: ListView.builder(
-            physics: BouncingScrollPhysics(),
-            padding: const EdgeInsets.all(20),
-            itemCount: 4,
-            itemBuilder: (context, index) {
-              return ListTileHistoryPariwisata();
-            },
-          ),
+          child: Obx(() => ListView.builder(
+                physics: BouncingScrollPhysics(),
+                padding: const EdgeInsets.all(20),
+                itemCount: controller.riwayatPerjalanan.length,
+                itemBuilder: (context, index) {
+                  // print(controller.riwayatPerjalanan.length);
+                  Pariwisata data = controller.riwayatPerjalanan[index];
+                  // print(data.createdAt);
+                  // print(data.namaBus);
+                  return ListTileHistoryPariwisata(
+                    pariwisata: data,
+                  );
+                },
+              )),
         ),
       ],
     ));
@@ -40,7 +47,7 @@ class NavBarHistoryTrip extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: Get.width,
-      color: Colors.green,
+      color: primaryColor,
       padding: const EdgeInsets.all(15),
       child: SafeArea(
         child: Row(
@@ -55,7 +62,7 @@ class NavBarHistoryTrip extends StatelessWidget {
             const Gap(10),
             Text(
               'History Pariwisata',
-              style: GoogleFonts.poppins(
+              style: GoogleFonts.outfit(
                 fontSize: 19,
                 color: Colors.white,
                 fontWeight: FontWeight.w500,
@@ -71,12 +78,15 @@ class NavBarHistoryTrip extends StatelessWidget {
 class ListTileHistoryPariwisata extends StatelessWidget {
   const ListTileHistoryPariwisata({
     super.key,
+    required this.pariwisata,
   });
+
+  final Pariwisata pariwisata;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.toNamed(Routes.DETAIL_HISTORY),
+      onTap: () => Get.toNamed(Routes.DETAIL_HISTORY, arguments: pariwisata),
       child: Container(
         margin: const EdgeInsets.only(bottom: 15),
         decoration: BoxDecoration(
@@ -122,16 +132,16 @@ class ListTileHistoryPariwisata extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Nama Armada 1',
-                    style: GoogleFonts.openSans(
+                    pariwisata.namaBus!,
+                    style: GoogleFonts.outfit(
                       fontWeight: FontWeight.w600,
                       color: Colors.black,
                       fontSize: 17,
                     ),
                   ),
                   Text(
-                    'Tujuan Armada',
-                    style: GoogleFonts.openSans(
+                    pariwisata.tujuanWisata!,
+                    style: GoogleFonts.outfit(
                       fontWeight: FontWeight.w500,
                       color: Colors.grey,
                     ),
@@ -139,14 +149,14 @@ class ListTileHistoryPariwisata extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        DateFormat('d/MM/yyyy').format(DateTime.now()),
-                        style: GoogleFonts.openSans(
+                        pariwisata.tanggalBerangkat!,
+                        style: GoogleFonts.outfit(
                           color: Colors.grey,
                         ),
                       ),
                       Text(
-                        " - 09:20",
-                        style: GoogleFonts.openSans(
+                        " - ${pariwisata.waktuBerangkat}",
+                        style: GoogleFonts.outfit(
                           color: Colors.grey,
                         ),
                       ),

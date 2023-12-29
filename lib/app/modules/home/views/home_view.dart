@@ -63,7 +63,7 @@ class MainMenuDashboard extends StatelessWidget {
             images: 'journey_icon.png',
           ),
           IconTileHome(
-            onTap: () => controller.createPerjalananWisata(),
+            onTap: () => Get.toNamed(Routes.HISTORY_TRIP),
             text: 'riwayat\nperjalanan',
             images: 'history.png',
           ),
@@ -95,25 +95,28 @@ class ImageDashboard extends StatelessWidget {
       width: Get.width,
       decoration: BoxDecoration(
         color: Colors.grey,
-        borderRadius: BorderRadius.circular(7),
+        borderRadius: BorderRadius.circular(10),
       ),
-      child: Image.network(
-        'https://knkt.go.id/api/apiimagestream/getimage_berita?x=00c824d4-f7c0-4695-99f2-25b8eeba89d3&x_Type=png&x_Kategori=Kegiatan',
-        loadingBuilder: (context, child, loadingProgress) {
-          if (loadingProgress == null) return child;
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: Image.network(
+          'https://knkt.go.id/api/apiimagestream/getimage_berita?x=00c824d4-f7c0-4695-99f2-25b8eeba89d3&x_Type=png&x_Kategori=Kegiatan',
+          loadingBuilder: (context, child, loadingProgress) {
+            if (loadingProgress == null) return child;
 
-          print(loadingProgress);
-          return Shimmer.fromColors(
-            baseColor: Colors.grey,
-            highlightColor: Colors.grey.shade100,
-            child: Container(
-              width: Get.width,
-              height: 200,
-              color: Colors.grey,
-            ),
-          );
-        },
-        fit: BoxFit.fill,
+            print(loadingProgress);
+            return Shimmer.fromColors(
+              baseColor: Colors.grey,
+              highlightColor: Colors.grey.shade100,
+              child: Container(
+                width: Get.width,
+                height: 200,
+                color: Colors.grey,
+              ),
+            );
+          },
+          fit: BoxFit.fill,
+        ),
       ),
     );
   }
@@ -138,7 +141,7 @@ class DataNotFound extends StatelessWidget {
           Text(
             "Tidak ada\nriwayat perjalanan".toUpperCase(),
             textAlign: TextAlign.center,
-            style: GoogleFonts.openSans(
+            style: GoogleFonts.outfit(
               fontWeight: FontWeight.w500,
               color: Colors.grey,
               fontSize: 20,
@@ -180,7 +183,7 @@ class HistoryTile extends StatelessWidget {
               children: [
                 Text(
                   'Nama armada digunakan',
-                  style: GoogleFonts.openSans(
+                  style: GoogleFonts.outfit(
                     fontWeight: FontWeight.w600,
                     color: Colors.black,
                     fontSize: 16,
@@ -188,7 +191,7 @@ class HistoryTile extends StatelessWidget {
                 ),
                 Text(
                   "Tanggal: ${DateFormat('d-MM-yyyy').format(DateTime.now())}",
-                  style: GoogleFonts.openSans(
+                  style: GoogleFonts.outfit(
                       fontWeight: FontWeight.w600, color: Colors.grey),
                 ),
               ],

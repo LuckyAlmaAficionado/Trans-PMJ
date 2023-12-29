@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../constant/colors.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -18,11 +19,8 @@ class LoginView extends GetView<LoginController> {
             begin: Alignment.topRight,
             end: Alignment.bottomRight,
             colors: [
-              Colors.green.shade100,
-              Colors.green.shade300,
-              Colors.green.shade500,
-              Colors.green.shade700,
-              Colors.green.shade900,
+              Colors.white,
+              primaryColor,
             ],
           ),
         ),
@@ -75,7 +73,7 @@ class LoginView extends GetView<LoginController> {
                       const Gap(25),
                       Material(
                         borderRadius: BorderRadius.circular(20),
-                        color: Colors.green[900],
+                        color: primaryColor,
                         child: InkWell(
                           onTap: () => controller.signIn(
                               controller.email.text, controller.password.text),
@@ -107,7 +105,7 @@ class LoginView extends GetView<LoginController> {
                       shape: BoxShape.circle,
                     ),
                     child: Image.asset(
-                      'assets/images/login_icon.png',
+                      'assets/images/logo_login.png',
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -177,7 +175,7 @@ class CButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       borderRadius: BorderRadius.circular(5),
-      color: Colors.green,
+      color: primaryColor,
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(5),

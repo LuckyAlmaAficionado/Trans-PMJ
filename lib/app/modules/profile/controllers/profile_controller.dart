@@ -65,7 +65,7 @@ class ProfileController extends GetxController {
     String noTelpon,
     String alamat,
   ) async {
-    if (checkTextField(
+    if (checkTextField( 
       username,
       nama,
       email,

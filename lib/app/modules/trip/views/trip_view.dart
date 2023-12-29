@@ -43,9 +43,7 @@ class TripView extends GetView<TripController> {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Column(
-                    children: [
-                      CircularProgressIndicator(),
-                    ],
+                    children: [CircularProgressIndicator()],
                   );
                 } else if (snapshot.hasData) {
                   Pariwisata data = snapshot.data as Pariwisata;

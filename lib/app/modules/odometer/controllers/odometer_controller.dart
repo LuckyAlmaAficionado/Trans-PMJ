@@ -83,6 +83,7 @@ class OdometerController extends GetxController {
 
   updatePerjalananAKhirWisata(String key, String paramOdometerAkhir) async {
     var token = await FirebaseAuth.instance.currentUser!.getIdToken();
+    print('kunci dari: $key');
     Uri url = Uri.parse(
         '${Constant.REALTIME_DATABASE}/trip_berjalan/$key.json?auth=$token');
     var storageFirebase = Get.put(FireStorageController());
@@ -162,7 +163,7 @@ class OdometerController extends GetxController {
       if (response.statusCode == 200) {
         print("createNewPerjalananWisata BERHASIL");
         Get.find<UserController>().updateStatusDriver(3);
-        Get.offAllNamed(Routes.TRIP);
+        Get.offAllNamed(Routes.TRIP, arguments: paramIdTrip);
       } else {
         throw ("gagal");
       }

@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:trans/app/constant/colors.dart';
 import 'package:trans/app/modules/login/views/login_view.dart';
 
 import '../controllers/profile_controller.dart';
@@ -19,7 +20,7 @@ class ProfileView extends GetView<ProfileController> {
           children: [
             Container(
               width: Get.width,
-              color: Colors.green,
+              color: primaryColor,
               padding: const EdgeInsets.all(15),
               child: SafeArea(
                 child: Row(
@@ -83,7 +84,7 @@ class ProfileView extends GetView<ProfileController> {
                   const Gap(10),
                   Text(
                     'email',
-                    style: GoogleFonts.poppins(
+                    style: GoogleFonts.outfit(
                       fontWeight: FontWeight.normal,
                       color: Colors.grey,
                       fontSize: 15,
@@ -101,7 +102,7 @@ class ProfileView extends GetView<ProfileController> {
                   const Gap(10),
                   Text(
                     'no telpon',
-                    style: GoogleFonts.poppins(
+                    style: GoogleFonts.outfit(
                       fontWeight: FontWeight.normal,
                       color: Colors.grey,
                       fontSize: 15,
@@ -119,7 +120,7 @@ class ProfileView extends GetView<ProfileController> {
                   const Gap(10),
                   Text(
                     'alamat',
-                    style: GoogleFonts.poppins(
+                    style: GoogleFonts.outfit(
                       fontWeight: FontWeight.normal,
                       color: Colors.grey,
                       fontSize: 15,

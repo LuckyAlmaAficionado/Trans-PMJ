@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:trans/app/constant/colors.dart';
 import 'package:trans/app/routes/app_pages.dart';
 
 import '../controllers/profile_page_controller.dart';
@@ -84,7 +85,7 @@ class TentangSayaKelolaProfile extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
-                  color: Colors.green[100],
+                  color: primaryContainerColor,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(10),
                     topRight: Radius.circular(10),
@@ -107,7 +108,7 @@ class TentangSayaKelolaProfile extends StatelessWidget {
                         children: [
                           Icon(
                             Icons.edit,
-                            color: Colors.green,
+                            color: primaryColor,
                             size: 15,
                           ),
                           const Gap(2),
@@ -115,7 +116,7 @@ class TentangSayaKelolaProfile extends StatelessWidget {
                             'UBAH',
                             style: GoogleFonts.outfit(
                               fontWeight: FontWeight.bold,
-                              color: Colors.green,
+                              color: primaryColor,
                             ),
                           )
                         ],
@@ -173,7 +174,7 @@ class PhotoProfile extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Colors.green[50],
+              color: primaryContainerColor,
               border: Border.all(
                 width: 2,
                 color: Colors.white,
@@ -182,7 +183,7 @@ class PhotoProfile extends StatelessWidget {
             child: Center(
               child: Icon(
                 Icons.camera_alt_rounded,
-                color: Colors.green,
+                color: primaryColor,
                 size: 17,
               ),
             ),
@@ -202,7 +203,7 @@ class NavBarKelolaProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: Get.width,
-      color: Colors.green,
+      color: primaryColor,
       padding: const EdgeInsets.all(15),
       child: SafeArea(
         child: Row(

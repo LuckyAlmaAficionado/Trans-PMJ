@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:trans/app/constant/colors.dart';
 
 class IconTileHome extends StatelessWidget {
   const IconTileHome({
@@ -23,7 +24,7 @@ class IconTileHome extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Colors.green.shade200,
+                  color: primaryContainerColor,
                   boxShadow: [
                     BoxShadow(
                       offset: Offset(2, 2),
@@ -41,10 +42,7 @@ class IconTileHome extends StatelessWidget {
             Text(
               text,
               textAlign: TextAlign.center,
-              style: GoogleFonts.lato(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-              ),
+              style: GoogleFonts.outfit(),
             )
           ],
         ),

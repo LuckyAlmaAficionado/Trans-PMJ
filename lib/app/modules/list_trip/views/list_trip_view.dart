@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:trans/app/constant/colors.dart';
 import 'package:trans/app/modules/list_trip/pariwisata_model.dart';
 import 'package:trans/app/routes/app_pages.dart';
 
@@ -25,7 +26,7 @@ class ListTripView extends GetView<ListTripController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
-                        Icons.folder_copy_rounded,
+                        Icons.folder_off_outlined,
                         color: Colors.grey,
                         size: 150,
                       ),
@@ -152,7 +153,7 @@ class _NavBarListTripView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: Get.width,
-      color: Colors.green,
+      color: primaryColor,
       padding: const EdgeInsets.all(16),
       child: SafeArea(
         child: Row(
@@ -172,6 +173,7 @@ class _NavBarListTripView extends StatelessWidget {
   }
 }
 
+// ignore: unused_element
 class _ListTileListView extends StatelessWidget {
   const _ListTileListView({
     required this.namaBus,

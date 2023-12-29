@@ -20,7 +20,7 @@ class SubTitleMenu extends StatelessWidget {
         children: [
           Text(
             'Menu utama',
-            style: GoogleFonts.lato(
+            style: GoogleFonts.outfit(
               fontSize: 19,
               fontWeight: FontWeight.w600,
             ),

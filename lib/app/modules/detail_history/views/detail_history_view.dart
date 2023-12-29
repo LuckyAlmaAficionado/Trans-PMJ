@@ -3,7 +3,8 @@ import 'package:gap/gap.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
+import 'package:trans/app/constant/colors.dart';
+import 'package:trans/app/constant/constant.dart';
 
 import '../controllers/detail_history_controller.dart';
 
@@ -11,6 +12,7 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
   const DetailHistoryView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Get.put(DetailHistoryController());
     return Scaffold(
         body: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,15 +46,15 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Usaha Jaya Pustaka',
-                            style: GoogleFonts.poppins(
+                            controller.detailPariwisata!.namaBus!,
+                            style: GoogleFonts.outfit(
                               fontWeight: FontWeight.w600,
                               fontSize: 19,
                             ),
                           ),
                           Text(
-                            'H 1925 SX',
-                            style: GoogleFonts.poppins(
+                            controller.detailPariwisata!.platBus!,
+                            style: GoogleFonts.outfit(
                               fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.grey,
@@ -91,31 +93,31 @@ class DetailHistoryView extends GetView<DetailHistoryController> {
                 TileHistoryView(
                   title: 'Tanggal Keberangkatan',
                   subTitle:
-                      "${DateFormat('d/MM/yyyy').format(DateTime.now())} - 10:20",
+                      " ${controller.detailPariwisata!.tanggalBerangkat!} - ${controller.detailPariwisata!.waktuBerangkat}",
                   image: 'schedule_icon.png',
                 ),
                 TileHistoryView(
                   title: 'Tanggal Kepulangan',
                   subTitle:
-                      "${DateFormat('d/MM/yyyy').format(DateTime.now().add(const Duration(days: 10)))} - 10:20",
+                      "${controller.detailPariwisata!.tanggalKembali!} - ${controller.detailPariwisata?.waktuKembali}",
                   image: 'schedule_icon.png',
                 ),
                 TileHistoryView(
                   title: 'Tujuan Wisata',
-                  subTitle:
-                      "Jl. puncak Mangu No.1, Batunya, Buleleng, Kabupaten Tabanan, Bali 82191",
+                  subTitle: controller.detailPariwisata!.tujuanWisata!,
                   image: 'map_icon.png',
+                ),
+                TileHistoryView(
+                  title: 'Nilai Kontrak',
+                  subTitle: Constant.formatRupiah(
+                      int.parse(controller.detailPariwisata!.nilaiKontrak!)),
+                  image: "salary_icon.png",
                 ),
                 TileHistoryView(
                   title: 'Note',
                   subTitle:
                       "Lokasi penjemputan dilakukan didepan sman 2 Semarang di taman merdeka indah",
                   image: "notes_icon.png",
-                ),
-                TileHistoryView(
-                  title: 'Pemasukan',
-                  subTitle: "IDR 12.000.000",
-                  image: "salary_icon.png",
                 ),
                 TileHistoryView(
                   title: 'Pengeluaran',
@@ -160,14 +162,14 @@ class TileHistoryView extends StatelessWidget {
           ),
           title: Text(
             title,
-            style: GoogleFonts.poppins(
+            style: GoogleFonts.outfit(
               fontWeight: FontWeight.w600,
               color: Colors.black,
             ),
           ),
           subtitle: Text(
             subTitle,
-            style: GoogleFonts.poppins(
+            style: GoogleFonts.outfit(
               fontWeight: FontWeight.normal,
               color: Colors.grey,
             ),
@@ -191,7 +193,7 @@ class NavBarDetailPerjalanan extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: Get.width,
-      color: Colors.green,
+      color: primaryContainerColor,
       padding: const EdgeInsets.all(15),
       child: SafeArea(
         child: Row(
@@ -206,7 +208,7 @@ class NavBarDetailPerjalanan extends StatelessWidget {
             const Gap(10),
             Text(
               'Detail Perjalanan Pariwisata',
-              style: GoogleFonts.poppins(
+              style: GoogleFonts.outfit(
                 fontSize: 19,
                 color: Colors.white,
                 fontWeight: FontWeight.w500,
