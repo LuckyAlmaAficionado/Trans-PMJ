@@ -4,8 +4,8 @@ Aplikasi Trans Flutter adalah sebuah aplikasi manajemen transportasi yang dibang
 
 # Screenshoot
 
-- ![TRANS1!](assets/screenshot/ss_1.png)
-- ![TRANS2!](assets/screenshot/ss_2.png)
+![TRANS1!](assets/screenshot/ss_1.png)
+![TRANS2!](assets/screenshot/ss_2.png)
 
 ## Fitur-fitur Utama
 
