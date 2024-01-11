@@ -2,6 +2,11 @@
 
 Aplikasi Trans Flutter adalah sebuah aplikasi manajemen transportasi yang dibangun menggunakan bahasa pemrograman Dart dan framework Flutter. Aplikasi ini menyediakan sejumlah fitur utama, termasuk login, dashboard, edit profile, riwayat, dan list perjalanan wisata. Data aplikasi disimpan menggunakan layanan Firebase, seperti Firebase Storage untuk menyimpan file, Firebase Firestore untuk database, dan Firebase Auth untuk manajemen otentikasi.
 
+# Screenshoot
+
+- ![TRANS1!](assets/screenshot/ss_1.jpg)
+- ![TRANS2!](assets/screenshot/ss_2.jpg)
+
 ## Fitur-fitur Utama
 
 ### 1. Login
@@ -34,31 +39,3 @@ Aplikasi ini memanfaatkan layanan Firebase untuk menyimpan dan mengelola data pe
 
 ### 3. Firebase Auth
 - Menangani proses otentikasi pengguna.
-
-## Cara Menjalankan Aplikasi
-
-1. Pastikan Anda telah menginstal [Flutter](https://flutter.dev/docs/get-started/install) di sistem Anda.
-2. Clone repositori ini ke dalam direktori lokal Anda.
-   ```bash
-   git clone https://github.com/username/nama-repo.git
-   ```
-3. Masuk ke direktori proyek.
-   ```bash
-   cd nama-repo
-   ```
-4. Jalankan perintah `flutter pub get` untuk menginstal dependensi proyek.
-   ```bash
-   flutter pub get
-   ```
-5. Konfigurasi kredensial Firebase pada file `lib/services/firebase_service.dart` dengan informasi yang diberikan oleh Firebase Console.
-6. Pastikan emulator atau perangkat Anda terhubung dan jalankan aplikasi menggunakan perintah:
-   ```bash
-   flutter run
-   ```
-7. Aplikasi akan terbuka di emulator atau perangkat yang Anda pilih.
-
-## Kontribusi
-
-Silakan berkontribusi dengan membuat *pull request* untuk perbaikan atau peningkatan fitur. Jangan lupa untuk membuat *issue* terlebih dahulu jika ingin membahas perubahan yang signifikan.
-
-Terima kasih telah menggunakan Aplikasi Trans Flutter!
