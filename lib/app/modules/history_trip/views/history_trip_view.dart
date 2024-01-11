@@ -3,7 +3,7 @@ import 'package:gap/gap.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:trans/app/constant/colors.dart';
+import 'package:trans/app/constant/constant.dart';
 import 'package:trans/app/modules/list_trip/pariwisata_model.dart';
 import 'package:trans/app/routes/app_pages.dart';
 
@@ -13,28 +13,38 @@ class HistoryTripView extends GetView<HistoryTripController> {
   const HistoryTripView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Column(
-      children: [
-        NavBarHistoryTrip(),
-        Expanded(
-          child: Obx(() => ListView.builder(
-                physics: BouncingScrollPhysics(),
-                padding: const EdgeInsets.all(20),
-                itemCount: controller.riwayatPerjalanan.length,
-                itemBuilder: (context, index) {
-                  // print(controller.riwayatPerjalanan.length);
-                  Pariwisata data = controller.riwayatPerjalanan[index];
-                  // print(data.createdAt);
-                  // print(data.namaBus);
-                  return ListTileHistoryPariwisata(
-                    pariwisata: data,
-                  );
-                },
-              )),
-        ),
-      ],
-    ));
+    return WillPopScope(
+      onWillPop: () async {
+        controller.startAnimation.value = false;
+        await Future.delayed(Duration(milliseconds: 200));
+        Get.back();
+        return true;
+      },
+      child: Scaffold(
+          body: Column(
+        children: [
+          const Gap(20),
+          NavBarHistoryTrip(),
+          Expanded(
+            child: Obx(() => ListView.builder(
+                  physics: BouncingScrollPhysics(),
+                  padding: const EdgeInsets.all(20),
+                  itemCount: controller.riwayatPerjalanan.length,
+                  itemBuilder: (context, index) {
+                    Pariwisata data = controller.riwayatPerjalanan[index];
+                    return Obx(() {
+                      return ListTileHistoryPariwisata(
+                        startAnimation: controller.startAnimation.value,
+                        index: index,
+                        pariwisata: data,
+                      );
+                    });
+                  },
+                )),
+          ),
+        ],
+      )),
+    );
   }
 }
 
@@ -45,29 +55,27 @@ class NavBarHistoryTrip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: Get.width,
-      color: primaryColor,
-      padding: const EdgeInsets.all(15),
-      child: SafeArea(
-        child: Row(
+    return SafeArea(
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        width: Get.width,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            GestureDetector(
-              onTap: () => Get.back(),
-              child: Icon(
-                Icons.arrow_back,
-                color: Colors.white,
-              ),
-            ),
-            const Gap(10),
             Text(
-              'History Pariwisata',
+              'Riwayat Perjalanan',
               style: GoogleFonts.outfit(
-                fontSize: 19,
-                color: Colors.white,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w600,
+                fontSize: 22,
               ),
             ),
+            const Gap(5),
+            Text(
+              'Dibawah ini adalah riwayat perjalanan anda',
+              style: GoogleFonts.outfit(
+                color: Colors.grey.shade500,
+              ),
+            )
           ],
         ),
       ),
@@ -76,95 +84,130 @@ class NavBarHistoryTrip extends StatelessWidget {
 }
 
 class ListTileHistoryPariwisata extends StatelessWidget {
-  const ListTileHistoryPariwisata({
+  ListTileHistoryPariwisata({
     super.key,
     required this.pariwisata,
+    required this.index,
+    required this.startAnimation,
   });
 
+  final int index;
   final Pariwisata pariwisata;
+  final bool startAnimation;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => Get.toNamed(Routes.DETAIL_HISTORY, arguments: pariwisata),
+    print(startAnimation);
+    return AnimatedContainer(
+      curve: Curves.easeInOutQuart,
+      width: Get.width,
+      duration: Duration(milliseconds: 300 + (index * 200)),
+      transform:
+          Matrix4.translationValues(startAnimation ? 0 : Get.width, 0, 0),
       child: Container(
-        margin: const EdgeInsets.only(bottom: 15),
+        margin: const EdgeInsets.only(bottom: 20),
+        width: Get.width,
+        padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(6),
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              offset: Offset(2, 2),
-              color: Colors.grey.shade300,
-              spreadRadius: 5,
-              blurRadius: 4,
-            ),
-          ],
+          borderRadius: BorderRadius.circular(10),
           border: Border.all(
-            width: 2,
-            color: Colors.grey.shade100,
+            width: 1,
+            color: Colors.grey,
           ),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: Get.width,
-              height: Get.height * 0.2,
-              decoration: BoxDecoration(
-                color: Colors.grey,
-                borderRadius: BorderRadius.circular(6),
+            Text(
+              'Trip #: ${pariwisata.idTripUtama!.split('-').last.toUpperCase()}',
+              style: GoogleFonts.outfit(
+                fontSize: 17,
+                color: Colors.indigoAccent,
+                fontWeight: FontWeight.bold,
               ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(6),
-                  topLeft: Radius.circular(6),
+            ),
+            const Gap(10),
+            const Gap(20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    Text(
+                      'Berangkat',
+                      style: GoogleFonts.outfit(
+                        fontSize: 15,
+                      ),
+                    ),
+                    const Gap(5),
+                    Text(
+                      "${pariwisata.tanggalBerangkat} - ${pariwisata.waktuBerangkat}",
+                      style: GoogleFonts.outfit(
+                        fontSize: 15,
+                      ),
+                    ),
+                  ],
                 ),
-                child: Image.network(
-                  'https://dummyimage.com/hd1080',
-                  fit: BoxFit.fill,
+                Expanded(
+                    child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Divider(thickness: 2),
+                )),
+                Column(
+                  children: [
+                    Text(
+                      'Kembali',
+                      style: GoogleFonts.outfit(
+                        fontSize: 15,
+                      ),
+                    ),
+                    const Gap(5),
+                    Text(
+                      "${pariwisata.tanggalKembali} - ${pariwisata.waktuKembali}",
+                      style: GoogleFonts.outfit(
+                        fontSize: 15,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            const Gap(20),
+            Text(
+              "${Constant.formatRupiah(int.parse(pariwisata.nilaiKontrak!))}",
+              style: GoogleFonts.outfit(
+                fontWeight: FontWeight.bold,
+                fontSize: 17,
+                color: Colors.indigoAccent.shade200,
+              ),
+            ),
+            const Gap(20),
+            Material(
+              borderRadius: BorderRadius.circular(15),
+              color: Colors.indigoAccent.withOpacity(0.2),
+              child: InkWell(
+                borderRadius: BorderRadius.circular(15),
+                onTap: () =>
+                    Get.toNamed(Routes.DETAIL_HISTORY, arguments: pariwisata),
+                splashColor: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 20,
+                  ),
+                  child: Center(
+                    child: Text(
+                      'Details',
+                      style: GoogleFonts.outfit(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.indigoAccent,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    pariwisata.namaBus!,
-                    style: GoogleFonts.outfit(
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                      fontSize: 17,
-                    ),
-                  ),
-                  Text(
-                    pariwisata.tujuanWisata!,
-                    style: GoogleFonts.outfit(
-                      fontWeight: FontWeight.w500,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        pariwisata.tanggalBerangkat!,
-                        style: GoogleFonts.outfit(
-                          color: Colors.grey,
-                        ),
-                      ),
-                      Text(
-                        " - ${pariwisata.waktuBerangkat}",
-                        style: GoogleFonts.outfit(
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            )
           ],
         ),
       ),

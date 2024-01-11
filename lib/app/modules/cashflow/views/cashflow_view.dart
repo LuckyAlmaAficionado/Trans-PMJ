@@ -6,6 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:trans/app/constant/colors.dart';
 
 import '../../../widgets/custom_button.dart';
 import '../controllers/cashflow_controller.dart';
@@ -19,7 +20,7 @@ class CashflowView extends GetView<CashflowController> {
       children: [
         Container(
           width: Get.width,
-          color: Colors.green,
+          color: primaryColor,
           padding: const EdgeInsets.all(15),
           child: SafeArea(
             child: Row(
@@ -64,7 +65,7 @@ class CashflowView extends GetView<CashflowController> {
                     child: Container(
                       padding: const EdgeInsets.all(15),
                       decoration: BoxDecoration(
-                        color: Colors.green,
+                        color: primaryColor ,
                         borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(10),
                           bottomRight: Radius.circular(10),

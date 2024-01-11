@@ -15,6 +15,7 @@ import '../../../controllers/user_controller.dart';
 class HomeController extends GetxController {
   var isTrue = true.obs;
   int onBackButton = 0;
+  var namaPengguna = ''.obs;
 
   logout() async {
     try {
@@ -24,7 +25,7 @@ class HomeController extends GetxController {
         await FirebaseAuth.instance.signOut();
         Constant.snackbar('Logout', "Berhasil logout", true);
         await Future.delayed(const Duration(seconds: 2));
-        Get.offNamed(Routes.LOGIN);
+        Get.offAllNamed(Routes.LOGIN);
       } else {
         throw Exception('error!');
       }
@@ -46,6 +47,23 @@ class HomeController extends GetxController {
     } else if (pengguna.status == 3) {
       Get.toNamed(Routes.TRIP);
     }
+  }
+
+  getUserProfile() async {
+    print('masuk sini getUserProfile');
+    String? token = await FirebaseAuth.instance.currentUser!.getIdToken();
+    Uri url = Uri.parse(
+        '${Constant.REALTIME_DATABASE}/users.json?auth=$token&orderBy="id"&equalTo="${FirebaseAuth.instance.currentUser!.uid}"');
+
+    var response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      var data = json.decode(response.body) as Map<String, dynamic>;
+      data.forEach((key, value) {
+        namaPengguna.value = value['nama'];
+      });
+    }
+    print(namaPengguna.value);
   }
 
   createPerjalananWisata() async {
@@ -94,6 +112,7 @@ class HomeController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
+    getUserProfile();
     await Get.put(UserController()).initialData();
   }
 

@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:slide_to_act/slide_to_act.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:trans/app/constant/colors.dart';
 import 'package:trans/app/constant/constant.dart';
 import 'package:trans/app/modules/list_trip/pariwisata_model.dart';
 import 'package:trans/app/routes/app_pages.dart';
@@ -312,7 +313,7 @@ class NavBarTrip extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: Get.width,
-      color: Colors.green,
+      color: primaryColor,
       padding: const EdgeInsets.all(15),
       child: SafeArea(
         child: Row(

@@ -21,8 +21,8 @@ class SubTitleMenu extends StatelessWidget {
           Text(
             'Menu utama',
             style: GoogleFonts.outfit(
-              fontSize: 19,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w500,
+              fontSize: 20,
             ),
           ),
           const Gap(10),

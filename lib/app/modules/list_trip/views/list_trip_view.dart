@@ -16,7 +16,7 @@ class ListTripView extends GetView<ListTripController> {
   Widget build(BuildContext context) {
     controller.getDataPariwisata;
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 244, 247, 254),
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           _NavBarListTripView(),
@@ -69,80 +69,107 @@ class ListTileDetailInfromasiPariwisata extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () =>
-          Get.toNamed(Routes.ACCEPT_TRIP, arguments: pariwisata.idTripUtama),
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 10),
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          width: 1,
+          color: Colors.grey,
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Icon(
-                  Icons.logo_dev,
-                  color: Colors.grey,
-                ),
-                const Gap(5),
-                Text(
-                  pariwisata.namaBus!,
-                  style: GoogleFonts.outfit(
-                    fontSize: 17,
-                    color: Colors.black,
-                  ),
-                ),
-              ],
-            ),
-            const Gap(20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "${pariwisata.tanggalBerangkat} - ${pariwisata.waktuBerangkat!}",
-                  style: GoogleFonts.outfit(
-                    fontSize: 16,
-                    color: Colors.black,
-                  ),
-                ),
-                Text(
-                  controller.formatRupiah(int.parse(pariwisata.nilaiKontrak!)),
-                  style: GoogleFonts.outfit(
-                    color: Colors.red,
-                    fontSize: 16,
-                  ),
-                ),
-              ],
-            ),
-            const Gap(5),
-            Text(
-              "${pariwisata.tanggalKembali} - ${pariwisata.waktuKembali!}",
-              style: GoogleFonts.outfit(
-                fontSize: 16,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                Icons.logo_dev,
                 color: Colors.grey,
               ),
+              const Gap(5),
+              Text(
+                pariwisata.namaBus!,
+                style: GoogleFonts.outfit(
+                  fontSize: 17,
+                  color: Colors.black,
+                ),
+              ),
+            ],
+          ),
+          const Gap(20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "${pariwisata.tanggalBerangkat} - ${pariwisata.waktuBerangkat!}",
+                style: GoogleFonts.outfit(
+                  fontSize: 16,
+                  color: Colors.black,
+                ),
+              ),
+              Text(
+                controller.formatRupiah(int.parse(pariwisata.nilaiKontrak!)),
+                style: GoogleFonts.outfit(
+                  color: Colors.red,
+                  fontSize: 16,
+                ),
+              ),
+            ],
+          ),
+          const Gap(5),
+          Text(
+            "${pariwisata.tanggalKembali} - ${pariwisata.waktuKembali!}",
+            style: GoogleFonts.outfit(
+              fontSize: 16,
+              color: Colors.grey,
             ),
-            const Gap(10),
-            Text(
-              'Tujuan Pariwisata: ',
-              style: GoogleFonts.outfit(
-                fontSize: 16,
-                color: Colors.black,
+          ),
+          const Gap(10),
+          Text(
+            'Tujuan Pariwisata: ',
+            style: GoogleFonts.outfit(
+              fontSize: 16,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            pariwisata.tujuanWisata!,
+            style: GoogleFonts.outfit(
+              fontSize: 16,
+              color: Colors.grey,
+            ),
+          ),
+          const Gap(15),
+          Material(
+            borderRadius: BorderRadius.circular(15),
+            color: Colors.indigoAccent.withOpacity(0.2),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(15),
+              onTap: () => Get.toNamed(Routes.ACCEPT_TRIP,
+                  arguments: pariwisata.idTripUtama),
+              splashColor: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 10,
+                  horizontal: 20,
+                ),
+                child: Center(
+                  child: Text(
+                    'Details',
+                    style: GoogleFonts.outfit(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.indigoAccent,
+                    ),
+                  ),
+                ),
               ),
             ),
-            Text(
-              pariwisata.tujuanWisata!,
-              style: GoogleFonts.outfit(
-                fontSize: 16,
-                color: Colors.grey,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

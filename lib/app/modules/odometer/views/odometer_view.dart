@@ -6,6 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:trans/app/constant/colors.dart';
 import 'package:trans/app/routes/app_pages.dart';
 import 'package:trans/app/widgets/custom_button.dart';
 
@@ -53,7 +54,7 @@ class OdometerView extends GetView<OdometerController> {
                         child: Container(
                           padding: const EdgeInsets.all(15),
                           decoration: BoxDecoration(
-                            color: Colors.green,
+                            color: primaryColor,
                             borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(10),
                               bottomRight: Radius.circular(10),
@@ -79,7 +80,7 @@ class OdometerView extends GetView<OdometerController> {
                                 color: Colors.white,
                                 child: Icon(
                                   Icons.add,
-                                  color: Colors.green,
+                                  color: primaryColor.withOpacity(0.4),
                                 ),
                               ),
                             ],
@@ -145,7 +146,7 @@ class NavBarOdometer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: Get.width,
-      color: Colors.green,
+      color: primaryColor,
       padding: const EdgeInsets.all(15),
       child: SafeArea(
         child: Row(

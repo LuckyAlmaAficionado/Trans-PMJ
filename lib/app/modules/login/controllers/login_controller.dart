@@ -92,15 +92,16 @@ class LoginController extends GetxController {
 
   @override
   void onInit() {
+    super.onInit();
+    print('init login controller');
     email = TextEditingController();
     password = TextEditingController();
-    super.onInit();
   }
 
   @override
   void onClose() {
-    email.dispose();
-    password.dispose();
+    email.clear();
+    password.clear();
     super.onClose();
   }
 

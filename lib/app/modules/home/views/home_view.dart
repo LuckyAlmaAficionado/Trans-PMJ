@@ -4,12 +4,12 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:trans/app/constant/colors.dart';
 import 'package:trans/app/constant/constant.dart';
 import 'package:trans/app/routes/app_pages.dart';
 
 import '../controllers/home_controller.dart';
 import '../widgets/icon_tile.dart';
-import '../widgets/navbar.dart';
 import '../widgets/subtitle.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -30,7 +30,56 @@ class HomeView extends GetView<HomeController> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            NavBarHome(),
+            // NavBarHome(),
+            Container(
+              color: primaryColor,
+              child: SafeArea(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(25.0),
+                      child: LayoutBuilder(
+                        builder: (context, constraints) => Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Selamat datang',
+                                  style: GoogleFonts.outfit(
+                                      fontSize: 16, color: Colors.white),
+                                ),
+                                Obx(
+                                  () => SizedBox(
+                                    width: constraints.maxWidth * 0.7,
+                                    child: Text(
+                                      controller.namaPengguna.value,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: GoogleFonts.outfit(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            GestureDetector(
+                              onTap: () => controller.createPerjalananWisata(),
+                              child: CircleAvatar(
+                                radius: 25,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
             ImageDashboard(),
             SubTitleMenu(controller: controller),
             const Gap(10),
@@ -104,7 +153,6 @@ class ImageDashboard extends StatelessWidget {
           loadingBuilder: (context, child, loadingProgress) {
             if (loadingProgress == null) return child;
 
-            print(loadingProgress);
             return Shimmer.fromColors(
               baseColor: Colors.grey,
               highlightColor: Colors.grey.shade100,

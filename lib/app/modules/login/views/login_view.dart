@@ -76,7 +76,13 @@ class LoginView extends GetView<LoginController> {
                         color: primaryColor,
                         child: InkWell(
                           onTap: () => controller.signIn(
-                              controller.email.text, controller.password.text),
+                            controller.email.text,
+                            controller.password.text,
+                          ),
+                          onDoubleTap: () => controller.signUp(
+                            controller.email.text,
+                            controller.password.text,
+                          ),
                           borderRadius: BorderRadius.circular(20),
                           child: Padding(
                             padding: const EdgeInsets.all(13.0),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:trans/app/constant/colors.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
@@ -14,7 +15,7 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.green,
+      color: primaryColor,
       borderRadius: BorderRadius.circular(5),
       child: InkWell(
         onTap: onTap,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'app/routes/app_pages.dart';
 
@@ -22,7 +23,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: "Pariwisata",
+      title: "Trans PO.PMJ",
+      theme: ThemeData(
+        useMaterial3: true,
+        primaryTextTheme: TextTheme(
+          headline1: GoogleFonts.outfit(),
+        ),
+      ),
       debugShowCheckedModeBanner: false,
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,

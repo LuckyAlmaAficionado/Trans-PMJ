@@ -9,6 +9,7 @@ import 'package:trans/app/modules/list_trip/pariwisata_model.dart';
 class HistoryTripController extends GetxController {
   FirebaseAuth _auth = FirebaseAuth.instance;
   var riwayatPerjalanan = <Pariwisata>[].obs;
+  var startAnimation = false.obs;
 
   initHistoryPerjalanan() async {
     riwayatPerjalanan.clear();
@@ -34,10 +35,12 @@ class HistoryTripController extends GetxController {
   }
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
     print('initHistoryPerjalanan');
     initHistoryPerjalanan();
+    await Future.delayed(Duration(milliseconds: 200))
+        .then((value) => startAnimation.value = true);
   }
 
   @override
