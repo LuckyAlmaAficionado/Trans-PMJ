@@ -94,8 +94,8 @@ class LoginController extends GetxController {
   void onInit() {
     super.onInit();
     print('init login controller');
-    email = TextEditingController();
-    password = TextEditingController();
+    email = TextEditingController(text: 'lucky@gmail.com');
+    password = TextEditingController(text: 'luckyy');
   }
 
   @override

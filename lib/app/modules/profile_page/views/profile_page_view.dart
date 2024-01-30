@@ -18,7 +18,7 @@ class ProfilePageView extends GetView<ProfilePageController> {
       children: [
         NavBarKelolaProfile(),
         const Gap(30),
-        PhotoProfile(),
+        PhotoProfile(controller: controller),
         const Gap(15),
         Obx(() => Text(
               controller.namaLengkap.value,
@@ -157,34 +157,61 @@ class TentangSayaKelolaProfile extends StatelessWidget {
 class PhotoProfile extends StatelessWidget {
   const PhotoProfile({
     super.key,
+    required this.controller,
   });
+
+  final ProfilePageController controller;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       alignment: Alignment.center,
       children: [
-        CircleAvatar(
-          radius: 60,
-        ),
+        Obx(() => Container(
+              width: 100,
+              height: 100,
+              decoration: BoxDecoration(
+                color: Colors.grey.shade300,
+                borderRadius: BorderRadius.circular(100),
+              ),
+              child: (controller.imgUrl.isNotEmpty)
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: Image.network(
+                        controller.imgUrl.value,
+                        fit: BoxFit.cover,
+                      ),
+                    )
+                  : Icon(
+                      Icons.person,
+                      size: 90,
+                    ),
+            )),
         Positioned(
           bottom: 0,
           right: 0,
-          child: Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: primaryContainerColor,
-              border: Border.all(
-                width: 2,
-                color: Colors.white,
-              ),
-            ),
-            child: Center(
-              child: Icon(
-                Icons.camera_alt_rounded,
-                color: primaryColor,
-                size: 17,
+          child: Material(
+            color: Colors.blue[900],
+            borderRadius: BorderRadius.circular(100),
+            child: InkWell(
+              onTap: () => controller.setProfilePicture(),
+              borderRadius: BorderRadius.circular(100),
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    width: 2,
+                    color: Colors.white,
+                  ),
+                ),
+                child: Center(
+                  child: Icon(
+                    Icons.camera_alt_rounded,
+                    color: Colors.white,
+                    size: 17,
+                  ),
+                ),
               ),
             ),
           ),

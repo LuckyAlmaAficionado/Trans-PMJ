@@ -28,12 +28,12 @@ class ProfileController extends GetxController {
   late TextEditingController noTelponC;
   late TextEditingController alamatC;
 
-  late var id = ''.obs;
-  late var username = ''.obs;
-  late var namaLengkap = ''.obs;
-  late var email = ''.obs;
-  late var noTelpon = ''.obs;
-  late var alamat = ''.obs;
+  var id = ''.obs;
+  var username = ''.obs;
+  var namaLengkap = ''.obs;
+  var email = ''.obs;
+  var noTelpon = ''.obs;
+  var alamat = ''.obs;
 
   checkTextField(
     String username,
@@ -53,7 +53,6 @@ class ProfileController extends GetxController {
       Constant.snackbar("Gagal", "Format email salah", false);
       return false;
     } else {
-      print('masuk true');
       return true;
     }
   }
@@ -65,15 +64,9 @@ class ProfileController extends GetxController {
     String noTelpon,
     String alamat,
   ) async {
-    if (checkTextField( 
-      username,
-      nama,
-      email,
-      noTelpon,
-      alamat,
-    )) {
+    if (checkTextField(username, nama, email, noTelpon, alamat)) {
       var token = await FirebaseAuth.instance.currentUser!.getIdToken();
-      print(id);
+
       Uri url =
           Uri.parse('${Constant.REALTIME_DATABASE}/users/$id.json?auth=$token');
 
@@ -91,6 +84,15 @@ class ProfileController extends GetxController {
             "role": "driver",
           }),
         );
+
+        try {
+          if (this.email.value != email) {
+            User? user = await FirebaseAuth.instance.currentUser;
+            await user?.updateEmail(email);
+          }
+        } on FirebaseAuthException catch (e) {
+          throw ('error $e');
+        }
 
         if (response.statusCode > 300 || response.statusCode < 200) {
           throw (response.statusCode);

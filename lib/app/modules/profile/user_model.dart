@@ -1,5 +1,6 @@
 class Pengguna {
   String? id;
+  String? profilePicture;
   String? username;
   String? nama;
   String? alamat;
@@ -14,6 +15,7 @@ class Pengguna {
 
   Pengguna(
       {this.id,
+      this.profilePicture,
       this.username,
       this.nama,
       this.alamat,
@@ -28,6 +30,7 @@ class Pengguna {
 
   factory Pengguna.fromJson(Map<String, dynamic> json) => Pengguna(
         id: json['id'],
+        profilePicture: json['profilePicture'] ?? '',
         username: json['username'],
         nama: json['nama'],
         alamat: json['alamat'],
@@ -44,6 +47,7 @@ class Pengguna {
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['id'] = id;
+    data['profilePicture'] = profilePicture;
     data['username'] = username;
     data['nama'] = nama;
     data['alamat'] = alamat;

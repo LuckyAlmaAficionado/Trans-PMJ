@@ -95,7 +95,7 @@ class ProfileView extends GetView<ProfileController> {
                     () => CustomTextFieldProfile(
                       controller: controller.emailC,
                       hintText: controller.email.value,
-                      textInputType: TextInputType.name,
+                      textInputType: TextInputType.emailAddress,
                       textInputAction: TextInputAction.next,
                     ),
                   ),
@@ -113,7 +113,7 @@ class ProfileView extends GetView<ProfileController> {
                     () => CustomTextFieldProfile(
                       controller: controller.noTelponC,
                       hintText: controller.noTelpon.value,
-                      textInputType: TextInputType.name,
+                      textInputType: TextInputType.phone,
                       textInputAction: TextInputAction.next,
                     ),
                   ),

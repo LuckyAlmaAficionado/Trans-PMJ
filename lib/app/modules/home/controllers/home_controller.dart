@@ -3,12 +3,12 @@ import 'dart:math';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:uuid/uuid.dart';
+
 import 'package:trans/app/constant/constant.dart';
 import 'package:trans/app/routes/app_pages.dart';
-
-import 'package:http/http.dart' as http;
-import 'package:uuid/uuid.dart';
 
 import '../../../controllers/user_controller.dart';
 
@@ -16,6 +16,7 @@ class HomeController extends GetxController {
   var isTrue = true.obs;
   int onBackButton = 0;
   var namaPengguna = ''.obs;
+  var imgUrl = ''.obs;
 
   logout() async {
     try {
@@ -50,20 +51,23 @@ class HomeController extends GetxController {
   }
 
   getUserProfile() async {
-    print('masuk sini getUserProfile');
-    String? token = await FirebaseAuth.instance.currentUser!.getIdToken();
-    Uri url = Uri.parse(
-        '${Constant.REALTIME_DATABASE}/users.json?auth=$token&orderBy="id"&equalTo="${FirebaseAuth.instance.currentUser!.uid}"');
+    try {
+      String? token = await FirebaseAuth.instance.currentUser!.getIdToken();
+      FirebaseAuth auth = FirebaseAuth.instance;
+      Uri url = Uri.parse(
+          '${Constant.REALTIME_DATABASE}/users.json?auth=$token&orderBy="id"&equalTo="${auth.currentUser!.uid}"');
 
-    var response = await http.get(url);
+      var response = await http.get(url);
 
-    if (response.statusCode == 200) {
-      var data = json.decode(response.body) as Map<String, dynamic>;
-      data.forEach((key, value) {
-        namaPengguna.value = value['nama'];
-      });
+      if (response.statusCode == 200) {
+        var data = json.decode(response.body) as Map<String, dynamic>;
+
+        namaPengguna.value = data.values.first['nama'];
+        imgUrl.value = data.values.first['profilePicture'];
+      }
+    } catch (e) {
+      throw ('error $e');
     }
-    print(namaPengguna.value);
   }
 
   createPerjalananWisata() async {

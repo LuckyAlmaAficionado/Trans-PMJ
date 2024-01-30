@@ -19,6 +19,7 @@ class TripView extends GetView<TripController> {
   const TripView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    // ignore: deprecated_member_use
     return WillPopScope(
       onWillPop: () async {
         Get.offAllNamed(Routes.HOME);

@@ -26,8 +26,8 @@ class MyApp extends StatelessWidget {
       title: "Trans PO.PMJ",
       theme: ThemeData(
         useMaterial3: true,
-        primaryTextTheme: TextTheme(
-          headline1: GoogleFonts.outfit(),
+        textTheme: GoogleFonts.outfitTextTheme(
+          Theme.of(context).textTheme,
         ),
       ),
       debugShowCheckedModeBanner: false,

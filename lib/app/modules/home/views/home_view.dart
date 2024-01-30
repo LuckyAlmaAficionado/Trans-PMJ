@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:trans/app/constant/colors.dart';
 import 'package:trans/app/constant/constant.dart';
 import 'package:trans/app/routes/app_pages.dart';
 
@@ -16,6 +15,7 @@ class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    // ignore: deprecated_member_use
     return WillPopScope(
       onWillPop: () async {
         if (controller.onBackButton != 1) {
@@ -27,64 +27,70 @@ class HomeView extends GetView<HomeController> {
       },
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // NavBarHome(),
-            Container(
-              color: primaryColor,
-              child: SafeArea(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(25.0),
-                      child: LayoutBuilder(
-                        builder: (context, constraints) => Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Selamat datang',
-                                  style: GoogleFonts.outfit(
-                                      fontSize: 16, color: Colors.white),
-                                ),
-                                Obx(
-                                  () => SizedBox(
-                                    width: constraints.maxWidth * 0.7,
-                                    child: Text(
-                                      controller.namaPengguna.value,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: GoogleFonts.outfit(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(80),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 15),
+            child: AppBar(
+              actions: [
+                Obx(() => Padding(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: GestureDetector(
+                        onTap: () => controller.createPerjalananWisata(),
+                        child: CircleAvatar(
+                          radius: 30,
+                          backgroundColor: Colors.grey.shade200,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(100),
+                            child: Image.network(
+                              controller.imgUrl.value,
+                              fit: BoxFit.cover,
                             ),
-                            GestureDetector(
-                              onTap: () => controller.createPerjalananWisata(),
-                              child: CircleAvatar(
-                                radius: 25,
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
                       ),
-                    )
-                  ],
-                ),
+                    ))
+              ],
+              title: Column(
+                children: [
+                  Text(
+                    'Selamat datang',
+                    style: GoogleFonts.outfit(
+                      fontSize: 15,
+                    ),
+                  ),
+                  Obx(
+                    () => Text(
+                      controller.namaPengguna.string,
+                      style: GoogleFonts.outfit(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 19,
+                      ),
+                    ),
+                  ),
+                ],
+                crossAxisAlignment: CrossAxisAlignment.start,
+              ),
+              centerTitle: false,
+              leadingWidth: 5,
+              leading: SizedBox(),
+            ),
+          ),
+        ),
+        body: Column(
+          children: [
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.all(0),
+                children: [
+                  ImageDashboard(),
+                  SubTitleMenu(controller: controller),
+                  const Gap(10),
+                  MainMenuDashboard(controller: controller),
+                  const Gap(10),
+                ],
               ),
             ),
-            ImageDashboard(),
-            SubTitleMenu(controller: controller),
-            const Gap(10),
-            MainMenuDashboard(controller: controller),
-            const Gap(10),
           ],
         ),
       ),

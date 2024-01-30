@@ -13,6 +13,7 @@ class HistoryTripView extends GetView<HistoryTripController> {
   const HistoryTripView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    // ignore: deprecated_member_use
     return WillPopScope(
       onWillPop: () async {
         controller.startAnimation.value = false;
@@ -21,29 +22,43 @@ class HistoryTripView extends GetView<HistoryTripController> {
         return true;
       },
       child: Scaffold(
-          body: Column(
-        children: [
-          const Gap(20),
-          NavBarHistoryTrip(),
-          Expanded(
-            child: Obx(() => ListView.builder(
-                  physics: BouncingScrollPhysics(),
-                  padding: const EdgeInsets.all(20),
-                  itemCount: controller.riwayatPerjalanan.length,
-                  itemBuilder: (context, index) {
-                    Pariwisata data = controller.riwayatPerjalanan[index];
-                    return Obx(() {
-                      return ListTileHistoryPariwisata(
-                        startAnimation: controller.startAnimation.value,
-                        index: index,
-                        pariwisata: data,
-                      );
-                    });
-                  },
-                )),
+          appBar: AppBar(
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Riwayat Perjalanan',
+                  style: GoogleFonts.montserrat(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                  ),
+                ),
+                Text(
+                  'Dibawah ini adalah riwayat perjalanan anda',
+                  style: GoogleFonts.montserrat(
+                    fontWeight: FontWeight.normal,
+                    fontSize: 13,
+                  ),
+                ),
+              ],
+            ),
+            titleSpacing: 0,
           ),
-        ],
-      )),
+          body: Obx(() => ListView.builder(
+                physics: BouncingScrollPhysics(),
+                padding: const EdgeInsets.fromLTRB(20, 5, 20, 0),
+                itemCount: controller.riwayatPerjalanan.length,
+                itemBuilder: (context, index) {
+                  Pariwisata data = controller.riwayatPerjalanan[index];
+                  return Obx(() {
+                    return ListTileHistoryPariwisata(
+                      startAnimation: controller.startAnimation.value,
+                      index: index,
+                      pariwisata: data,
+                    );
+                  });
+                },
+              ))),
     );
   }
 }
@@ -64,7 +79,7 @@ class NavBarHistoryTrip extends StatelessWidget {
           children: [
             Text(
               'Riwayat Perjalanan',
-              style: GoogleFonts.outfit(
+              style: GoogleFonts.montserrat(
                 fontWeight: FontWeight.w600,
                 fontSize: 22,
               ),
@@ -72,7 +87,7 @@ class NavBarHistoryTrip extends StatelessWidget {
             const Gap(5),
             Text(
               'Dibawah ini adalah riwayat perjalanan anda',
-              style: GoogleFonts.outfit(
+              style: GoogleFonts.montserrat(
                 color: Colors.grey.shade500,
               ),
             )
@@ -109,18 +124,22 @@ class ListTileHistoryPariwisata extends StatelessWidget {
         width: Get.width,
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-            width: 1,
-            color: Colors.grey,
-          ),
-        ),
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                offset: Offset(0, 5),
+                spreadRadius: 5,
+                blurRadius: 5,
+                color: Colors.grey.shade200,
+              ),
+            ]),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               'Trip #: ${pariwisata.idTripUtama!.split('-').last.toUpperCase()}',
-              style: GoogleFonts.outfit(
+              style: GoogleFonts.montserrat(
                 fontSize: 17,
                 color: Colors.indigoAccent,
                 fontWeight: FontWeight.bold,
@@ -135,14 +154,14 @@ class ListTileHistoryPariwisata extends StatelessWidget {
                   children: [
                     Text(
                       'Berangkat',
-                      style: GoogleFonts.outfit(
+                      style: GoogleFonts.montserrat(
                         fontSize: 15,
                       ),
                     ),
                     const Gap(5),
                     Text(
                       "${pariwisata.tanggalBerangkat} - ${pariwisata.waktuBerangkat}",
-                      style: GoogleFonts.outfit(
+                      style: GoogleFonts.montserrat(
                         fontSize: 15,
                       ),
                     ),
@@ -157,14 +176,14 @@ class ListTileHistoryPariwisata extends StatelessWidget {
                   children: [
                     Text(
                       'Kembali',
-                      style: GoogleFonts.outfit(
+                      style: GoogleFonts.montserrat(
                         fontSize: 15,
                       ),
                     ),
                     const Gap(5),
                     Text(
                       "${pariwisata.tanggalKembali} - ${pariwisata.waktuKembali}",
-                      style: GoogleFonts.outfit(
+                      style: GoogleFonts.montserrat(
                         fontSize: 15,
                       ),
                     ),
@@ -175,7 +194,7 @@ class ListTileHistoryPariwisata extends StatelessWidget {
             const Gap(20),
             Text(
               "${Constant.formatRupiah(int.parse(pariwisata.nilaiKontrak!))}",
-              style: GoogleFonts.outfit(
+              style: GoogleFonts.montserrat(
                 fontWeight: FontWeight.bold,
                 fontSize: 17,
                 color: Colors.indigoAccent.shade200,
@@ -198,7 +217,7 @@ class ListTileHistoryPariwisata extends StatelessWidget {
                   child: Center(
                     child: Text(
                       'Details',
-                      style: GoogleFonts.outfit(
+                      style: GoogleFonts.montserrat(
                         fontSize: 17,
                         fontWeight: FontWeight.w600,
                         color: Colors.indigoAccent,

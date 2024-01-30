@@ -16,6 +16,7 @@ class OdometerView extends GetView<OdometerController> {
   const OdometerView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    // ignore: deprecated_member_use
     return WillPopScope(
       onWillPop: () async {
         Get.offAllNamed(Routes.HOME);
