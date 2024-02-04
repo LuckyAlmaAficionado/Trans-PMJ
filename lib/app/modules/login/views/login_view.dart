@@ -3,12 +3,15 @@ import 'package:gap/gap.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:trans/app/controllers/auth_controller.dart';
 
 import '../../../constant/colors.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
-  const LoginView({Key? key}) : super(key: key);
+  // auth controller ....
+  final authC = Get.find<AuthController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,6 +82,12 @@ class LoginView extends GetView<LoginController> {
                             controller.email.text,
                             controller.password.text,
                           ),
+                          // onTap: () {
+                          //   authC.login(
+                          //     controller.email.text,
+                          //     controller.password.text,
+                          //   );
+                          // },
                           onDoubleTap: () => controller.signUp(
                             controller.email.text,
                             controller.password.text,

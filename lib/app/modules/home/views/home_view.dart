@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:trans/app/constant/constant.dart';
+import 'package:trans/app/controllers/auth_controller.dart';
 import 'package:trans/app/routes/app_pages.dart';
 
 import '../controllers/home_controller.dart';
@@ -12,7 +13,8 @@ import '../widgets/icon_tile.dart';
 import '../widgets/subtitle.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({Key? key}) : super(key: key);
+  final authC = Get.find<AuthController>();
+
   @override
   Widget build(BuildContext context) {
     // ignore: deprecated_member_use
@@ -37,17 +39,37 @@ class HomeView extends GetView<HomeController> {
                       padding: const EdgeInsets.only(right: 20),
                       child: GestureDetector(
                         onTap: () => controller.createPerjalananWisata(),
-                        child: CircleAvatar(
-                          radius: 30,
-                          backgroundColor: Colors.grey.shade200,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(100),
-                            child: Image.network(
-                              controller.imgUrl.value,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: (controller.imgUrl.value.isNotEmpty)
+                              ? Image.network(
+                                  controller.imgUrl.value,
+                                  loadingBuilder:
+                                      (context, child, loadingProgress) =>
+                                          (loadingProgress == null)
+                                              ? child
+                                              : Center(
+                                                  child:
+                                                      CircularProgressIndicator(),
+                                                ),
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.asset(
+                                  'assets/images/profile_icon.png',
+                                  fit: BoxFit.cover,
+                                ),
                         ),
+                        // child: CircleAvatar(
+                        //   radius: 30,
+                        //   backgroundColor: Colors.grey.shade200,
+                        //   child: ClipRRect(
+                        //     borderRadius: BorderRadius.circular(100),
+                        //     child: Image.network(
+                        //       controller.imgUrl.value,
+                        //       fit: BoxFit.cover,
+                        //     ),
+                        //   ),
+                        // ),
                       ),
                     ))
               ],

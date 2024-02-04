@@ -28,16 +28,29 @@ class TripView extends GetView<TripController> {
       child: Scaffold(
         body: SlidingUpPanel(
           maxHeight: Get.height * 0.8,
-          minHeight: Get.height * 0.6,
+          minHeight: Get.height * 0.58,
           backdropEnabled: true,
           color: Colors.transparent,
+          header: Container(
+            width: Get.width,
+            height: 20,
+            alignment: Alignment.center,
+            child: Container(
+              width: 100,
+              height: 5,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                color: Colors.grey,
+              ),
+            ),
+          ),
           panel: Container(
             padding: const EdgeInsets.all(25),
             decoration: BoxDecoration(
               color: Colors.grey.shade50,
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
               ),
             ),
             child: FutureBuilder(
@@ -129,7 +142,7 @@ class TripView extends GetView<TripController> {
                   color: Colors.grey.shade300,
                   image: DecorationImage(
                     image: NetworkImage(
-                        'https://www.udacity.com/blog/wp-content/uploads/2021/02/img8.png'),
+                        'https://cdn0-production-images-kly.akamaized.net/H4syXeLdvp1YgIqGhqfkZpFDXzs=/750x0/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/4285334/original/067385300_1673234631-0.jpg'),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -158,7 +171,7 @@ class TripView extends GetView<TripController> {
                       });
                     },
                     label: 'Pengeluaran\nBensin',
-                    icons: Icons.widgets_outlined,
+                    icons: 'fuel_icon.png',
                   ),
                   CDivider(),
                   CIcon(
@@ -171,13 +184,13 @@ class TripView extends GetView<TripController> {
                       });
                     },
                     label: 'Pengeluaran\nLainnya',
-                    icons: Icons.widgets_outlined,
+                    icons: 'pengeluaran_icon.png',
                   ),
                   CDivider(),
                   CIcon(
                     onTap: () => Get.toNamed(Routes.CASHFLOW),
                     label: 'Pergantian\nDarurat',
-                    icons: Icons.widgets_outlined,
+                    icons: 'alert_icon.png',
                   ),
                 ],
               ),
@@ -345,7 +358,7 @@ class CIcon extends StatelessWidget {
 
   final Color colors;
   final String label;
-  final IconData? icons;
+  final String? icons;
   void Function()? onTap;
 
   @override
@@ -362,10 +375,10 @@ class CIcon extends StatelessWidget {
             color: colors,
             child: Column(
               children: [
-                Icon(
-                  icons,
-                  color: Colors.black,
-                  size: 30,
+                Container(
+                  width: 30,
+                  height: 30,
+                  child: Image.asset('assets/images/$icons'),
                 ),
                 Text(
                   label,
